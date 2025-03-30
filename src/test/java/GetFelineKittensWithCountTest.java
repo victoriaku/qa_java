@@ -16,7 +16,7 @@ public class GetFelineKittensWithCountTest {
         feline = new Feline();
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters (name = "Тестовые данные. Количество котят: {0}")
     public static Object[] kittensCounts() {
         return new Object[]{ 0, 2, 10 };
     }

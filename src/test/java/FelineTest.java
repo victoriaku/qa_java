@@ -1,24 +1,16 @@
 import com.example.Feline;
-import org.junit.runner.RunWith;
 import org.junit.Test;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.Spy;
-import org.mockito.Mockito;
 
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-@RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
-
-    @Spy
-    Feline feline;
+    private Feline feline = new Feline();
 
     @Test
     public void eatMeatReturnsMeat() throws Exception {
         List<String> food = List.of("Животные", "Птицы", "Рыба");
-        Mockito.when(feline.getFood("Хищник")).thenReturn(food);
         assertEquals("Метод eatMeat класса Feline должен вернуть список еды: " + food,
                 food, feline.eatMeat());
     }
@@ -33,7 +25,6 @@ public class FelineTest {
     @Test
     public void getKittensWithoutCountReturnsOne(){
         int count = 1;
-        Mockito.when(feline.getKittens(count)).thenReturn(count);
         assertEquals("Метод getKittens без параметров класса Feline должен вернуть количество котят: " + count,
                 count, feline.getKittens());
     }

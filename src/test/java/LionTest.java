@@ -26,7 +26,7 @@ public class LionTest {
         this.sex = sex;
     }
 
-    @Parameterized.Parameters
+    @Parameterized.Parameters (name = "Тестовые данные. Пол льва: {0}")
     public static Object[] sexes(){
         return new Object[]{ "Самец", "Самка", "Львица" };
     }
