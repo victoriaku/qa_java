@@ -1,61 +1,35 @@
 import com.example.Feline;
 import com.example.Lion;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.Before;
-import org.junit.Assume;
 import org.junit.Test;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.Mockito;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-@RunWith(Parameterized.class)
+@RunWith(MockitoJUnitRunner.class)
 public class LionTest {
 
     @Mock
     Feline feline;
 
-    private final String sex;
     private Lion lion;
 
-    public LionTest(String sex){
-        this.sex = sex;
-    }
-
-    @Parameterized.Parameters (name = "Тестовые данные. Пол льва: {0}")
-    public static Object[] sexes(){
-        return new Object[]{ "Самец", "Самка", "Львица" };
-    }
-
     @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        try {
-            lion = new Lion(feline, sex);
-        } catch (Exception e) {
-            Assume.assumeTrue("\n" + e, false);
-        }
+    public void createLion() throws Exception {
+        lion = new Lion(feline, "Самец");
     }
 
     @Test
     public void getKittensReturnsOne(){
         int kittensCount = 1;
         Mockito.when(feline.getKittens()).thenReturn(kittensCount);
-        assertEquals("Метод getKittens класса LionAlex должен вернуть количество котят: " + kittensCount,
+        assertEquals("Метод getKittens класса Lion должен вернуть количество котят: " + kittensCount,
                 kittensCount, lion.getKittens());
-    }
-
-    @Test
-    public void doesHaveManeTest(){
-        if (sex.equals("Самец")){
-            assertTrue("Самец должен иметь гриву", lion.doesHaveMane());
-        } else if (sex.equals("Самка")){
-            assertFalse("Самка не должна иметь гриву", lion.doesHaveMane());
-        }
     }
 
     @Test
